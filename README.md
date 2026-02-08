@@ -32,14 +32,14 @@ This setup utilizes a Public/Private Subnet architecture within a custom VPC to 
 
 | Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
 |:---:|---|:---:|
-| **1. Security Group** | Configured inbound rules for Port 3306 restricted to the Public Subnet. / パブリックサブネットからのポート3306のみを許可するようにインバウンドルールを構成しました。 | [![Security Group](images/rds-security-group-inbound.png) |
-| **2. DB Connection & Creation** | Established connection to the RDS endpoint and successfully created the `TEST_DB` database. / RDSエンドポイントへの接続を確立し、`TEST_DB`データベースを正常に作成しました。 | [![DB Connection and Creation](images/rds-ec2-initial-connect.png) |
-| **3. Data Entry** | Created the `users` table and inserted sample data records. / `users`テーブルを作成し、サンプルデータレコードを挿入しました。 | [![Data Insertion](images/rds-data-insertion-test.png) |
-| **4. Pre-Failover** | Verified the current active IP address (`10.100.2.217`) before triggering failover. / フェイルオーバーを実行する前に、現在アクティブなIPアドレス（`10.100.2.217`）を確認しました。 | [![Pre-Failover Check](images/rds-pre-failover-ip-check.png) |
-| **5. Trigger Failover** | Executed "Reboot with Failover" via the AWS RDS Console. / AWS RDSコンソールから「フェイルオーバーを伴う再起動」を実行しました。 | [![Failover Trigger](images/rds-trigger-reboot-failover.png) |
-| **6. Post-Failover** | Verified the new active IP address (`10.100.3.198`) after successful failover. / フェイルオーバー成功後、新しいアクティブIPアドレス（`10.100.3.198`）を確認しました。 | [![Post-Failover Check](images/rds-post-failover-ip-check.png)|
-| **7. Data Integrity** | Confirmed that `TEST_DB` and all records remained intact after the switch. / 切り替え後も`TEST_DB`とすべてのレコードがそのまま残っていることを確認しました。 | [![Data Integrity](images/rds-data-persistence-verify.png) |
-| **8. Multi-AZ Status** | Confirmed the "Multi-AZ: Yes" status on the RDS Dashboard to ensure infrastructure redundancy. / インフラストラクチャの冗長性を確保するために、RDSダッシュボードで「マルチAZ：はい」のステータスを確認しました。 | [![Multi-AZ Status](images/rds-multi-az-status-dashboard.png) |
+| **1. Security Group** | Configured inbound rules for Port 3306 restricted to the Public Subnet. / パブリックサブネットからのポート3306のみを許可するようにインバウンドルールを構成しました。 | ![Security Group](images/rds-security-group-inbound.png) |
+| **2. DB Connection & Creation** | Established connection to the RDS endpoint and successfully created the `TEST_DB` database. / RDSエンドポイントへの接続を確立し、`TEST_DB`データベースを正常に作成しました。 | ![DB Connection and Creation](images/rds-ec2-initial-connect.png) |
+| **3. Data Entry** | Created the `users` table and inserted sample data records. / `users`テーブルを作成し、サンプルデータレコードを挿入しました。 | ![Data Insertion](images/rds-data-insertion-test.png) |
+| **4. Pre-Failover** | Verified the current active IP address (`10.100.2.217`) before triggering failover. / フェイルオーバーを実行する前に、現在アクティブなIPアドレス（`10.100.2.217`）を確認しました。 | ![Pre-Failover Check](images/rds-pre-failover-ip-check.png) |
+| **5. Trigger Failover** | Executed "Reboot with Failover" via the AWS RDS Console. / AWS RDSコンソールから「フェイルオーバーを伴う再起動」を実行しました。 | ![Failover Trigger](images/rds-trigger-reboot-failover.png) |
+| **6. Post-Failover** | Verified the new active IP address (`10.100.3.198`) after successful failover. / フェイルオーバー成功後、新しいアクティブIPアドレス（`10.100.3.198`）を確認しました。 | ![Post-Failover Check](images/rds-post-failover-ip-check.png)|
+| **7. Data Integrity** | Confirmed that `TEST_DB` and all records remained intact after the switch. / 切り替え後も`TEST_DB`とすべてのレコードがそのまま残っていることを確認しました。 | ![Data Integrity](images/rds-data-persistence-verify.png) |
+| **8. Multi-AZ Status** | Confirmed the "Multi-AZ: Yes" status on the RDS Dashboard to ensure infrastructure redundancy. / インフラストラクチャの冗長性を確保するために、RDSダッシュボードで「マルチAZ：はい」のステータスを確認しました。 | ![Multi-AZ Status](images/rds-multi-az-status-dashboard.png) |
 
 </details>
 
