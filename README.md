@@ -9,6 +9,7 @@
 ---
 
 # **Project Architecture**
+<img src="images/rds-architecture.png" width="700">
 
 This setup utilizes a Public/Private Subnet architecture within a custom VPC to ensure maximum security for the database layer.
 
@@ -23,9 +24,6 @@ This setup utilizes a Public/Private Subnet architecture within a custom VPC to 
 
 #  **Implementation Steps**
 
-<details>
-<summary><b>Click here to view Step-by-Step Configuration & Results</b></summary>
-
 | Step | Description | Screenshot |
 |:---:|---|:---:|
 | **1. Security Group** | Configured inbound rules for Port 3306 restricted to the Public Subnet. | ![Security Group](images/rds-security-group-inbound.png) |
@@ -37,26 +35,31 @@ This setup utilizes a Public/Private Subnet architecture within a custom VPC to 
 | **7. Data Integrity** | Confirmed that `TEST_DB` and all records remained intact after the switch. | ![Data Integrity](images/rds-data-persistence-verify.png) |
 | **8. Multi-AZ Status** | Confirmed the "Multi-AZ: Yes" status on the RDS Dashboard to ensure infrastructure redundancy. | ![Multi-AZ Status](images/rds-multi-az-status-dashboard.png) |
 
-</details>
-
 ---
 
 #  **Technical Insights**
 
-* **High Availability (HA):** By using AWS RDS Multi-AZ, the service can recover in seconds from an AZ failure, ensuring minimal downtime for users.
+- **High Availability (HA):** By using AWS RDS Multi-AZ, the service can recover in seconds from an AZ failure, ensuring minimal downtime for users.
 
 <br>
 
-* **Zero Data Loss:** Synchronous replication guarantees that the standby instance is always up-to-date, preventing data loss during failover.
+- **Zero Data Loss:** Synchronous replication guarantees that the standby instance is always up-to-date, preventing data loss during failover.
 
 <br>
 
-* **Security Best Practice:** Placing the database in a private subnet and using a Bastion Host protects the data from direct external attacks.
+- **Seamless Failover via RDS Endpoint:** The Bastion Host connects via a single RDS DNS Endpoint. During a failover, AWS automatically updates the DNS record to point to the Standby instance's IP, requiring no manual application-level changes.
 
+<br>
+
+- **Resilient DB Subnet Group:** By configuring a DB Subnet Group across three Availability Zones (Zones B, C, and D), the architecture ensures that if one zone fails entirely, AWS can provision a new standby instance in the fallback zone (Zone B) to maintain the Multi-AZ standard.
+
+<br>
+
+- **Security Best Practice:** Placing the database in a private subnet and using a Bastion Host protects the data from direct external attacks.
 ---
 
 #  **Tech Stack**
 
-* **AWS Services:** RDS (MySQL), EC2 (Ubuntu 24.04), VPC, Security Groups, Route 53
+* **AWS Services:** RDS (MySQL), EC2 (Ubuntu 24.04), VPC, Security Groups
 * **Database Tools:** MySQL Client 8.0
-* **Protocols:** TCP/IP, Port 3306
+* **Protocols:** TCP/IP, Port 3306(MySQL),Port22 (SSH)
